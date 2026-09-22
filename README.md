@@ -1,2 +1,1 @@
-# Site-empresa
-Primeiro site para a empresa KCINY
+KCINY — Tecnologia, mídia e soluções digitais. Projeto de site institucional desenvolvido para apresentar a marca, seus serviços e futuras soluções digitais.
