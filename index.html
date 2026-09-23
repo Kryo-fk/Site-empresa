@@ -3,600 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>KCINY — Tecnologia e Soluções Digitais</title>
-  <meta
-    name="description"
-    content="KCINY — soluções digitais, tecnologia e serviços para empresas e criadores."
-  >
+  <meta name="description" content="KCINY — tecnologia, mídia e soluções digitais para empresas e criadores.">
 
   <style>
-    :root {
-      --purple: #8b5cf6;
-      --purple-dark: #6d28d9;
-      --black: #070707;
-      --black-2: #101010;
-      --gray: #171717;
-      --gray-light: #a1a1aa;
-      --white: #ffffff;
-      --border: rgba(255,255,255,0.09);
+    :root{
+      --purple:#8b5cf6;
+      --purple-dark:#6d28d9;
+      --black:#070707;
+      --black2:#101010;
+      --gray:#171717;
+      --gray-light:#a1a1aa;
+      --white:#fff;
+      --border:rgba(255,255,255,.09);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+    body{font-family:Arial,Helvetica,sans-serif;background:var(--black);color:var(--white);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+
+    header{
+      position:fixed;top:0;left:0;width:100%;z-index:1000;
+      background:rgba(7,7,7,.82);backdrop-filter:blur(15px);
+      border-bottom:1px solid var(--border)
     }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--black);
-      color: var(--white);
-      line-height: 1.6;
+    .navbar{
+      max-width:1200px;margin:auto;height:75px;padding:0 25px;
+      display:flex;align-items:center;justify-content:space-between
     }
+    .logo{font-size:27px;font-weight:900;letter-spacing:2px}
+    .logo span,.footer-logo span{color:var(--purple)}
+    .nav-links{display:flex;gap:30px;list-style:none}
+    .nav-links a{color:#d4d4d8;font-size:14px;transition:.3s}
+    .nav-links a:hover{color:var(--purple)}
+    .menu-button{display:none;background:none;border:0;color:white;font-size:28px;cursor:pointer}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* ================= HEADER ================= */
-
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(7, 7, 7, 0.82);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .navbar {
-      max-width: 1200px;
-      margin: auto;
-      height: 75px;
-      padding: 0 25px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .logo span {
-      color: var(--purple);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #d4d4d8;
-      font-size: 14px;
-      transition: .3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--purple);
-    }
-
-    .menu-button {
-      display: none;
-      background: none;
-      border: 0;
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    /* ================= HERO ================= */
-
-    .hero {
-      min-height: 100vh;
-      padding: 150px 25px 80px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
+    .hero{
+      min-height:100vh;padding:150px 25px 80px;
+      display:flex;align-items:center;justify-content:center;
       background:
-        radial-gradient(circle at 75% 40%, rgba(139,92,246,.22), transparent 30%),
-        radial-gradient(circle at 20% 70%, rgba(109,40,217,.12), transparent 25%),
-        var(--black);
+        radial-gradient(circle at 75% 40%,rgba(139,92,246,.22),transparent 30%),
+        radial-gradient(circle at 20% 70%,rgba(109,40,217,.12),transparent 25%),
+        var(--black)
+    }
+    .hero-container{
+      max-width:1200px;width:100%;display:grid;
+      grid-template-columns:1.2fr .8fr;gap:60px;align-items:center
+    }
+    .tag{
+      display:inline-block;padding:8px 14px;margin-bottom:20px;
+      color:#d8b4fe;background:rgba(139,92,246,.1);
+      border:1px solid rgba(139,92,246,.25);border-radius:30px;font-size:13px
+    }
+    .hero h1{font-size:clamp(42px,6vw,75px);line-height:1.05;margin-bottom:25px}
+    .hero h1 span{color:var(--purple)}
+    .hero p{max-width:650px;color:var(--gray-light);font-size:18px;margin-bottom:35px}
+    .buttons{display:flex;gap:15px;flex-wrap:wrap}
+    .btn{padding:14px 23px;border-radius:10px;font-weight:bold;transition:.3s;display:inline-block}
+    .btn-primary{background:var(--purple);color:white}
+    .btn-primary:hover{background:var(--purple-dark);transform:translateY(-2px)}
+    .btn-secondary{border:1px solid var(--border);background:var(--gray)}
+    .btn-secondary:hover{border-color:var(--purple)}
+
+    .hero-card{
+      min-height:360px;padding:35px;border:1px solid var(--border);border-radius:25px;
+      background:linear-gradient(145deg,rgba(139,92,246,.16),rgba(255,255,255,.02));
+      box-shadow:0 25px 80px rgba(0,0,0,.5);
+      display:flex;align-items:center;justify-content:center
+    }
+    .k-logo{
+      width:180px;height:180px;border-radius:45px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:100px;font-weight:900;
+      background:linear-gradient(145deg,#a78bfa,#6d28d9);
+      box-shadow:0 0 70px rgba(139,92,246,.35)
     }
 
-    .hero-container {
-      max-width: 1200px;
-      width: 100%;
+    section{padding:100px 25px}
+    .section-container{max-width:1200px;margin:auto}
+    .section-title{text-align:center;margin-bottom:60px}
+    .section-title span{
+      color:var(--purple);font-size:14px;font-weight:bold;
+      text-transform:uppercase;letter-spacing:2px
+    }
+    .section-title h2{font-size:42px;margin:10px 0}
+    .section-title p{color:var(--gray-light);max-width:650px;margin:auto}
 
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 60px;
-      align-items: center;
+    .services{background:#0b0b0b}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .service-card{
+      padding:30px;background:var(--gray);border:1px solid var(--border);
+      border-radius:18px;transition:.3s
+    }
+    .service-card:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.5)}
+    .service-icon{
+      width:50px;height:50px;display:flex;align-items:center;justify-content:center;
+      border-radius:12px;margin-bottom:20px;background:rgba(139,92,246,.13);
+      color:#c4b5fd;font-size:23px
+    }
+    .service-card h3{margin-bottom:10px}
+    .service-card p{color:var(--gray-light);font-size:14px}
+
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .about-text h2{font-size:42px;margin-bottom:20px}
+    .about-text h2 span{color:var(--purple)}
+    .about-text p{color:var(--gray-light);margin-bottom:15px}
+    .about-box{
+      padding:40px;border-radius:25px;
+      background:linear-gradient(145deg,#151515,#0c0c0c);
+      border:1px solid var(--border)
+    }
+    .about-stat{
+      display:flex;justify-content:space-between;padding:18px 0;
+      border-bottom:1px solid var(--border)
+    }
+    .about-stat:last-child{border-bottom:0}
+    .about-stat strong{color:var(--purple)}
+
+    .plans{background:#0b0b0b}
+    .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .plan{padding:35px;border-radius:20px;border:1px solid var(--border);background:var(--gray)}
+    .plan.featured{border:1px solid var(--purple);box-shadow:0 0 40px rgba(139,92,246,.12)}
+    .plan h3{font-size:22px;margin-bottom:10px}
+    .price{font-size:35px;font-weight:bold;margin:20px 0}
+    .price small{font-size:13px;color:var(--gray-light);font-weight:normal}
+    .plan ul{list-style:none;margin-bottom:25px}
+    .plan li{margin:10px 0;color:#d4d4d8;font-size:14px}
+    .plan li::before{content:"✓";color:var(--purple);margin-right:8px}
+
+    .contact{text-align:center}
+    .contact-box{
+      max-width:850px;margin:auto;padding:60px 30px;border-radius:25px;
+      background:radial-gradient(circle at center,rgba(139,92,246,.16),transparent 55%),var(--gray);
+      border:1px solid var(--border)
+    }
+    .contact-box h2{font-size:42px;margin-bottom:15px}
+    .contact-box p{color:var(--gray-light);margin-bottom:30px}
+
+    footer{padding:35px 25px;border-top:1px solid var(--border);background:#050505}
+    .footer-container{
+      max-width:1200px;margin:auto;display:flex;justify-content:space-between;
+      align-items:center;gap:20px
+    }
+    .footer-container p{color:#71717a;font-size:13px}
+    .footer-logo{font-size:20px;font-weight:bold}
+
+    .whatsapp{
+      position:fixed;right:22px;bottom:22px;width:58px;height:58px;
+      display:flex;align-items:center;justify-content:center;border-radius:50%;
+      background:#25D366;color:white;font-size:27px;
+      box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:999
     }
 
-    .tag {
-      display: inline-block;
-      padding: 8px 14px;
-      margin-bottom: 20px;
-
-      color: #d8b4fe;
-      background: rgba(139,92,246,.1);
-      border: 1px solid rgba(139,92,246,.25);
-      border-radius: 30px;
-
-      font-size: 13px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 6vw, 75px);
-      line-height: 1.05;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 span {
-      color: var(--purple);
-    }
-
-    .hero p {
-      max-width: 650px;
-      color: var(--gray-light);
-      font-size: 18px;
-      margin-bottom: 35px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 23px;
-      border-radius: 10px;
-      font-weight: bold;
-      transition: .3s;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--purple);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--purple-dark);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      background: var(--gray);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--purple);
-    }
-
-    /* HERO CARD */
-
-    .hero-card {
-      min-height: 360px;
-      padding: 35px;
-
-      border: 1px solid var(--border);
-      border-radius: 25px;
-
-      background:
-        linear-gradient(145deg, rgba(139,92,246,.16), rgba(255,255,255,.02));
-
-      box-shadow: 0 25px 80px rgba(0,0,0,.5);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .k-logo {
-      width: 180px;
-      height: 180px;
-
-      border-radius: 45px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 100px;
-      font-weight: 900;
-
-      background: linear-gradient(145deg, #a78bfa, #6d28d9);
-      box-shadow: 0 0 70px rgba(139,92,246,.35);
-    }
-
-    /* ================= GENERAL ================= */
-
-    section {
-      padding: 100px 25px;
-    }
-
-    .section-container {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-title span {
-      color: var(--purple);
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .section-title h2 {
-      font-size: 42px;
-      margin: 10px 0;
-    }
-
-    .section-title p {
-      color: var(--gray-light);
-      max-width: 650px;
-      margin: auto;
-    }
-
-    /* ================= SERVICES ================= */
-
-    .services {
-      background: #0b0b0b;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .service-card {
-      padding: 30px;
-      background: var(--gray);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      transition: .3s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(139,92,246,.5);
-    }
-
-    .service-icon {
-      width: 50px;
-      height: 50px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 12px;
-      margin-bottom: 20px;
-
-      background: rgba(139,92,246,.13);
-      color: #c4b5fd;
-      font-size: 23px;
-    }
-
-    .service-card h3 {
-      margin-bottom: 10px;
-    }
-
-    .service-card p {
-      color: var(--gray-light);
-      font-size: 14px;
-    }
-
-    /* ================= ABOUT ================= */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-text h2 {
-      font-size: 42px;
-      margin-bottom: 20px;
-    }
-
-    .about-text h2 span {
-      color: var(--purple);
-    }
-
-    .about-text p {
-      color: var(--gray-light);
-      margin-bottom: 15px;
-    }
-
-    .about-box {
-      padding: 40px;
-      border-radius: 25px;
-      background: linear-gradient(145deg, #151515, #0c0c0c);
-      border: 1px solid var(--border);
-    }
-
-    .about-stat {
-      display: flex;
-      justify-content: space-between;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .about-stat:last-child {
-      border-bottom: 0;
-    }
-
-    .about-stat strong {
-      color: var(--purple);
-    }
-
-    /* ================= PLANS ================= */
-
-    .plans {
-      background: #0b0b0b;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .plan {
-      padding: 35px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--gray);
-    }
-
-    .plan.featured {
-      border: 1px solid var(--purple);
-      box-shadow: 0 0 40px rgba(139,92,246,.12);
-    }
-
-    .plan h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .price {
-      font-size: 35px;
-      font-weight: bold;
-      margin: 20px 0;
-    }
-
-    .price small {
-      font-size: 13px;
-      color: var(--gray-light);
-      font-weight: normal;
-    }
-
-    .plan ul {
-      list-style: none;
-      margin-bottom: 25px;
-    }
-
-    .plan li {
-      margin: 10px 0;
-      color: #d4d4d8;
-      font-size: 14px;
-    }
-
-    .plan li::before {
-      content: "✓";
-      color: var(--purple);
-      margin-right: 8px;
-    }
-
-    /* ================= CONTACT ================= */
-
-    .contact {
-      text-align: center;
-    }
-
-    .contact-box {
-      max-width: 850px;
-      margin: auto;
-      padding: 60px 30px;
-
-      border-radius: 25px;
-
-      background:
-        radial-gradient(circle at center, rgba(139,92,246,.16), transparent 55%),
-        var(--gray);
-
-      border: 1px solid var(--border);
-    }
-
-    .contact-box h2 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
-
-    .contact-box p {
-      color: var(--gray-light);
-      margin-bottom: 30px;
-    }
-
-    /* ================= FOOTER ================= */
-
-    footer {
-      padding: 35px 25px;
-      border-top: 1px solid var(--border);
-      background: #050505;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: auto;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .footer-container p {
-      color: #71717a;
-      font-size: 13px;
-    }
-
-    .footer-logo {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .footer-logo span {
-      color: var(--purple);
-    }
-
-    /* ================= WHATSAPP ================= */
-
-    .whatsapp {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-
-      width: 58px;
-      height: 58px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #25D366;
-      color: white;
-
-      font-size: 27px;
-
-      box-shadow: 0 8px 30px rgba(0,0,0,.4);
-
-      z-index: 999;
-    }
-
-    /* ================= RESPONSIVE ================= */
-
-    @media (max-width: 850px) {
-
-      .menu-button {
-        display: block;
+    @media(max-width:850px){
+      .menu-button{display:block}
+      .nav-links{
+        position:absolute;top:75px;left:0;width:100%;padding:25px;
+        flex-direction:column;gap:20px;background:#090909;
+        border-bottom:1px solid var(--border);display:none
       }
-
-      .nav-links {
-        position: absolute;
-        top: 75px;
-        left: 0;
-        width: 100%;
-
-        padding: 25px;
-
-        flex-direction: column;
-        gap: 20px;
-
-        background: #090909;
-        border-bottom: 1px solid var(--border);
-
-        display: none;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .hero-container,
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        min-height: 280px;
-      }
-
-      .services-grid,
-      .plans-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-title h2,
-      .about-text h2,
-      .contact-box h2 {
-        font-size: 32px;
-      }
-
-      .footer-container {
-        flex-direction: column;
-        text-align: center;
-      }
+      .nav-links.active{display:flex}
+      .hero-container,.about-grid{grid-template-columns:1fr}
+      .hero-card{min-height:280px}
+      .services-grid,.plans-grid{grid-template-columns:1fr}
+      .section-title h2,.about-text h2,.contact-box h2{font-size:32px}
+      .footer-container{flex-direction:column;text-align:center}
     }
 
-    @media (max-width: 480px) {
-
-      .hero {
-        padding-top: 120px;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .k-logo {
-        width: 140px;
-        height: 140px;
-        font-size: 75px;
-      }
+    @media(max-width:480px){
+      .hero{padding-top:120px}
+      .hero h1{font-size:42px}
+      .hero p{font-size:16px}
+      .k-logo{width:140px;height:140px;font-size:75px}
     }
   </style>
 </head>
 
 <body>
-
-  <!-- ================= HEADER ================= -->
-
   <header>
     <nav class="navbar">
+      <a href="#inicio" class="logo">K<span>CINY</span></a>
 
-      <a href="#inicio" class="logo">
-        K<span>CINY</span>
-      </a>
-
-      <button class="menu-button" id="menuButton">
-        ☰
-      </button>
+      <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#inicio">Início</a></li>
@@ -605,29 +194,16 @@
         <li><a href="#planos">Planos</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
-
     </nav>
   </header>
 
-
-  <!-- ================= HERO ================= -->
-
   <main>
-
     <section class="hero" id="inicio">
-
       <div class="hero-container">
-
         <div>
+          <span class="tag">Tecnologia • Mídia • Soluções Digitais</span>
 
-          <span class="tag">
-            Tecnologia • Mídia • Soluções Digitais
-          </span>
-
-          <h1>
-            Transformamos ideias em
-            <span>soluções digitais.</span>
-          </h1>
+          <h1>Transformamos ideias em <span>soluções digitais.</span></h1>
 
           <p>
             A KCINY cria experiências digitais, serviços tecnológicos
@@ -635,378 +211,164 @@
           </p>
 
           <div class="buttons">
-
-            <a href="#contato" class="btn btn-primary">
-              Começar agora
-            </a>
-
-            <a href="#servicos" class="btn btn-secondary">
-              Conhecer serviços
-            </a>
-
+            <a href="#contato" class="btn btn-primary">Começar agora</a>
+            <a href="#servicos" class="btn btn-secondary">Conhecer serviços</a>
           </div>
-
         </div>
-
 
         <div class="hero-card">
-
-          <div class="k-logo">
-            K
-          </div>
-
+          <div class="k-logo">K</div>
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- ================= SERVICES ================= -->
-
     <section class="services" id="servicos">
-
       <div class="section-container">
-
         <div class="section-title">
-
           <span>O que fazemos</span>
-
           <h2>Nossas soluções</h2>
-
           <p>
             Serviços digitais pensados para ajudar negócios a terem
             uma presença profissional na internet.
           </p>
-
         </div>
-
 
         <div class="services-grid">
-
           <article class="service-card">
-
             <div class="service-icon">◈</div>
-
             <h3>Criação de Sites</h3>
-
-            <p>
-              Sites modernos, rápidos e adaptados para celulares,
-              computadores e tablets.
-            </p>
-
+            <p>Sites modernos, rápidos e adaptados para celulares, computadores e tablets.</p>
           </article>
 
-
           <article class="service-card">
-
             <div class="service-icon">✦</div>
-
             <h3>Marketing Digital</h3>
-
-            <p>
-              Estratégias digitais para ajudar empresas a alcançar
-              novos clientes.
-            </p>
-
+            <p>Estratégias digitais para ajudar empresas a alcançar novos clientes.</p>
           </article>
 
-
           <article class="service-card">
-
             <div class="service-icon">▣</div>
-
             <h3>Redes Sociais</h3>
-
-            <p>
-              Criação de conteúdos e materiais para fortalecer
-              a presença da sua marca.
-            </p>
-
+            <p>Criação de conteúdos e materiais para fortalecer a presença da sua marca.</p>
           </article>
 
-
           <article class="service-card">
-
             <div class="service-icon">⌘</div>
-
             <h3>Identidade Visual</h3>
-
-            <p>
-              Desenvolvimento de elementos visuais para tornar
-              sua empresa reconhecível.
-            </p>
-
+            <p>Desenvolvimento de elementos visuais para tornar sua empresa reconhecível.</p>
           </article>
 
-
           <article class="service-card">
-
             <div class="service-icon">⚡</div>
-
             <h3>Automação</h3>
-
-            <p>
-              Soluções para simplificar tarefas e melhorar
-              processos digitais.
-            </p>
-
+            <p>Soluções para simplificar tarefas e melhorar processos digitais.</p>
           </article>
-
 
           <article class="service-card">
-
             <div class="service-icon">+</div>
-
             <h3>Soluções Personalizadas</h3>
-
-            <p>
-              Projetos desenvolvidos de acordo com as necessidades
-              específicas de cada negócio.
-            </p>
-
+            <p>Projetos desenvolvidos de acordo com as necessidades específicas de cada negócio.</p>
           </article>
-
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- ================= ABOUT ================= -->
 
     <section id="sobre">
-
       <div class="section-container">
-
         <div class="about-grid">
-
           <div class="about-text">
-
-            <h2>
-              Conheça a <span>KCINY</span>
-            </h2>
-
-            <p>
-              A KCINY é uma marca voltada para tecnologia, mídia
-              e soluções digitais.
-            </p>
-
-            <p>
-              Nosso objetivo é criar produtos e serviços que
-              aproximem empresas e pessoas da tecnologia.
-            </p>
-
-            <p>
-              Começamos pequenos, mas pensamos em grande.
-            </p>
-
+            <h2>Conheça a <span>KCINY</span></h2>
+            <p>A KCINY é uma marca voltada para tecnologia, mídia e soluções digitais.</p>
+            <p>Nosso objetivo é criar produtos e serviços que aproximem empresas e pessoas da tecnologia.</p>
+            <p>Começamos pequenos, mas pensamos em grande.</p>
           </div>
-
 
           <div class="about-box">
-
-            <div class="about-stat">
-              <span>Marca</span>
-              <strong>KCINY</strong>
-            </div>
-
-            <div class="about-stat">
-              <span>Área</span>
-              <strong>Tecnologia</strong>
-            </div>
-
-            <div class="about-stat">
-              <span>Atuação</span>
-              <strong>Digital</strong>
-            </div>
-
-            <div class="about-stat">
-              <span>Objetivo</span>
-              <strong>Crescimento</strong>
-            </div>
-
+            <div class="about-stat"><span>Marca</span><strong>KCINY</strong></div>
+            <div class="about-stat"><span>Área</span><strong>Tecnologia</strong></div>
+            <div class="about-stat"><span>Atuação</span><strong>Digital</strong></div>
+            <div class="about-stat"><span>Objetivo</span><strong>Crescimento</strong></div>
           </div>
-
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- ================= PLANS ================= -->
-
     <section class="plans" id="planos">
-
       <div class="section-container">
-
         <div class="section-title">
-
           <span>Planos</span>
-
           <h2>Escolha uma solução</h2>
-
-          <p>
-            Os valores abaixo são exemplos e podem ser alterados
-            de acordo com o serviço contratado.
-          </p>
-
+          <p>Os valores abaixo são exemplos e podem ser alterados de acordo com o serviço contratado.</p>
         </div>
 
-
         <div class="plans-grid">
-
           <article class="plan">
-
             <h3>Inicial</h3>
-
             <p>Para quem está começando.</p>
-
-            <div class="price">
-              R$ 99
-              <small>/mês</small>
-            </div>
-
+            <div class="price">R$ 99 <small>/mês</small></div>
             <ul>
               <li>Presença digital</li>
               <li>Suporte básico</li>
               <li>Atualizações</li>
             </ul>
-
-            <a href="#contato" class="btn btn-secondary">
-              Quero esse
-            </a>
-
+            <a href="#contato" class="btn btn-secondary">Quero esse</a>
           </article>
 
-
           <article class="plan featured">
-
             <h3>Profissional</h3>
-
             <p>Para empresas em crescimento.</p>
-
-            <div class="price">
-              R$ 199
-              <small>/mês</small>
-            </div>
-
+            <div class="price">R$ 199 <small>/mês</small></div>
             <ul>
               <li>Site profissional</li>
               <li>Suporte</li>
               <li>Otimização</li>
               <li>Atualizações</li>
             </ul>
-
-            <a href="#contato" class="btn btn-primary">
-              Quero esse
-            </a>
-
+            <a href="#contato" class="btn btn-primary">Quero esse</a>
           </article>
 
-
           <article class="plan">
-
             <h3>Personalizado</h3>
-
             <p>Para projetos específicos.</p>
-
-            <div class="price">
-              Sob consulta
-            </div>
-
+            <div class="price">Sob consulta</div>
             <ul>
               <li>Projeto personalizado</li>
               <li>Integrações</li>
               <li>Automação</li>
               <li>Suporte especializado</li>
             </ul>
-
-            <a href="#contato" class="btn btn-secondary">
-              Falar conosco
-            </a>
-
+            <a href="#contato" class="btn btn-secondary">Falar conosco</a>
           </article>
-
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- ================= CONTACT ================= -->
 
     <section class="contact" id="contato">
-
       <div class="section-container">
-
         <div class="contact-box">
+          <h2>Vamos criar algo?</h2>
+          <p>Entre em contato com a KCINY e conte sua ideia.</p>
 
-          <h2>
-            Vamos criar algo?
-          </h2>
-
-          <p>
-            Entre em contato com a KCINY e conte sua ideia.
-          </p>
-
-          <!-- TROQUE O NÚMERO ABAIXO -->
-
-          <a
-            class="btn btn-primary"
-            href="https://wa.me/5591999999999"
-            target="_blank"
-          >
+          <!-- TROQUE 5591999999999 PELO SEU NÚMERO DE WHATSAPP -->
+          <a class="btn btn-primary" href="https://wa.me/5591999999999" target="_blank">
             Falar pelo WhatsApp
           </a>
-
         </div>
-
       </div>
-
     </section>
-
   </main>
 
-
-  <!-- ================= FOOTER ================= -->
-
   <footer>
-
     <div class="footer-container">
-
-      <div class="footer-logo">
-        K<span>CINY</span>
-      </div>
-
-      <p>
-        © 2026 KCINY. Todos os direitos reservados.
-      </p>
-
+      <div class="footer-logo">K<span>CINY</span></div>
+      <p>© 2026 KCINY. Todos os direitos reservados.</p>
     </div>
-
   </footer>
 
-
-  <!-- ================= WHATSAPP ================= -->
-
-  <a
-    class="whatsapp"
-    href="https://wa.me/5591999999999"
-    target="_blank"
-    aria-label="WhatsApp"
-  >
-    ☎
-  </a>
-
-
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- TROQUE 5591999999999 PELO SEU NÚMERO DE WHATSAPP -->
+  <a class="whatsapp" href="https://wa.me/5591999999999" target="_blank" aria-label="WhatsApp">☎</a>
 
   <script>
-
     const menuButton = document.getElementById("menuButton");
     const navLinks = document.getElementById("navLinks");
 
@@ -1014,16 +376,11 @@
       navLinks.classList.toggle("active");
     });
 
-
     document.querySelectorAll(".nav-links a").forEach(link => {
-
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
       });
-
     });
-
   </script>
-
 </body>
 </html>
